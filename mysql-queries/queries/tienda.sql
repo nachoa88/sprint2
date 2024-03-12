@@ -93,3 +93,49 @@ SELECT * FROM producto p INNER JOIN fabricante f ON p.codigo_fabricante = f.codi
 SELECT p.nombre, p.precio FROM producto p INNER JOIN fabricante f ON p.codigo_fabricante = f.codigo WHERE f.nombre LIKE('%e');
 
 -- Query 31:
+SELECT p.nombre, p.precio FROM producto p INNER JOIN fabricante f ON p.codigo_fabricante = f.codigo WHERE f.nombre LIKE('%w%');
+
+-- Query 32:
+SELECT p.nombre, p.precio, f.nombre FROM producto p INNER JOIN fabricante f ON p.codigo_fabricante = f.codigo WHERE p.precio >= 180 ORDER BY p.precio DESC, p.nombre;
+
+-- Query 33:
+SELECT DISTINCT f.codigo, f.nombre FROM fabricante f INNER JOIN producto p ON f.codigo = p.codigo_fabricante;
+
+-- Query 34: OUTER JOIN
+SELECT f.nombre, p.nombre FROM fabricante f LEFT OUTER JOIN producto p ON f.codigo = p.codigo_fabricante;
+
+-- Query 35: IS NULL
+SELECT f.nombre FROM fabricante f LEFT OUTER JOIN producto p ON f.codigo = p.codigo_fabricante WHERE p.nombre IS NULL;
+
+-- Query 36: SET (Variable)
+SET @code_f := (SELECT codigo FROM fabricante WHERE nombre = 'Lenovo');
+SELECT * FROM producto WHERE codigo_fabricante = @code_f;
+-- Query 36 - Option 2 using a subquery
+SELECT * FROM producto WHERE codigo_fabricante = (SELECT codigo FROM fabricante WHERE nombre = 'Lenovo');
+
+-- Query 37: MAX() + Variable.
+SET @max_price_lenovo := (SELECT MAX(precio) FROM producto WHERE codigo_fabricante = (SELECT codigo FROM fabricante WHERE nombre = 'Lenovo'));
+SELECT * FROM producto WHERE precio = @max_price_lenovo;
+-- Query 37: Option 2 MAX() + using two subqueries.
+SELECT * FROM producto WHERE precio = (SELECT MAX(precio) FROM producto WHERE codigo_fabricante = (SELECT codigo FROM fabricante WHERE nombre = 'Lenovo'));
+
+-- Query 38: Variable
+SET @max_price_lenovo := (SELECT MAX(p.precio) FROM producto p INNER JOIN fabricante f ON p.codigo_fabricante = f.codigo WHERE f.nombre = 'Lenovo');
+SELECT nombre FROM producto WHERE precio = @max_price_lenovo;
+-- Query 38: Option 2 ORDER BY & LIMIT
+SELECT p.nombre FROM producto p INNER JOIN fabricante f ON p.codigo_fabricante = f.codigo WHERE f.nombre = 'Lenovo' ORDER BY p.precio DESC LIMIT 1;
+
+-- Query 39: MIN() + Variable
+SET @min_price_hewlett := (SELECT MIN(p.precio) FROM producto p INNER JOIN fabricante f ON p.codigo_fabricante = f.codigo WHERE f.nombre = 'Hewlett-Packard');
+SELECT nombre FROM producto WHERE precio = @min_price_hewlett;
+-- Query 39: Option 2 ORDER BY ASC & LIMIT
+SELECT p.nombre FROM producto p INNER JOIN fabricante f ON p.codigo_fabricante = f.codigo WHERE f.nombre = 'Hewlett-Packard' ORDER BY p.precio LIMIT 1;
+
+-- Query 40:
+SET @max_price_lenovo := (SELECT MAX(precio) FROM producto WHERE codigo_fabricante = (SELECT codigo FROM fabricante WHERE nombre = 'Lenovo'));
+SELECT * FROM producto WHERE precio >= @max_price_lenovo;
+
+-- Query 41: AVG() + variable
+SET @avg_price_asus := (SELECT AVG(p.precio) FROM producto p INNER JOIN fabricante f ON p.codigo_fabricante = f.codigo WHERE f.nombre = 'Asus');
+SELECT p.* FROM producto p INNER JOIN fabricante f ON p.codigo_fabricante = f.codigo WHERE f.nombre = 'Asus' AND p.precio > @avg_price_asus;
+
