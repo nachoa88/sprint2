@@ -8,10 +8,10 @@ Bla bla bla descritpion.
 ### Estructura de dades
 ## Nivell 1
 1) Òptica - Creat el diagrama EER i el script `.sql` per executar.
-2) Pizzeria - Pendent.
+2) Pizzeria - Creat el diagrama EER, pendent per crear el script.
 
 ## Nivell 2
-1) YouTube - Pendent.
+1) YouTube - Creat el diagrama EER, pendent per revisar i crear el script.
 
 ## Nivell 3
 1) Spotify - Pendent.

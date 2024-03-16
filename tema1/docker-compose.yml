@@ -1,0 +1,17 @@
+version: '3.8' # specify the version of docker-compose file format, each version has different features and compatibilities with Docker Engine (Docker version)
+
+services:
+  db:
+    image: mysql:latest # use the latest mysql image
+    command: --default-authentication-plugin=mysql_native_password 
+    restart: always # restart the container if it crashes
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456789 # set the root password
+      MYSQL_ROOT_HOST: '%' # allow root access from any host
+    ports:
+      - 3306:3306 # map the port to the host
+    volumes:
+    - db_data:/var/lib/mysql # mount the volume to persist the data
+
+volumes:
+  db_data: # named volume
