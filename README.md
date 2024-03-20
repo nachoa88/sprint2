@@ -14,7 +14,7 @@ Utilitzat `docker compose` command amb el fitxer `docker-compose.yml` per crear 
 1) YouTube - Creat el diagrama EER i el script `.sql` per executar.
 
 ## Nivell 3
-1) Spotify - Pendent.
+1) Spotify - Creat el diagrama EER i el script `.sql` per executar.
 
 
 # Sprint 2 - Tema 2 - MongoDB
