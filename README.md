@@ -25,8 +25,8 @@ Utilitzat `docker compose` command amb el fitxer `docker-compose.yml` per crear 
 
 ### Estructura de dades - MongoDB
 ## Nivell 1 - Optica
-1) Pendent.
-2) Pendent.
+1) Creat el diagrama amb Moon Modeler amb un fitxer `.dmm` i després afegit les dades amb el script `.js`. Pendent de correccions.
+2) Creat el diagrama amb Moon Modeler amb un fitxer `.dmm` i després afegit les dades amb el script `.js`. Pendent de correccions.
 
 ## Nivell 2
 
