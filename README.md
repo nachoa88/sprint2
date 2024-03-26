@@ -29,6 +29,7 @@ Utilitzat `docker compose` command amb el fitxer `docker-compose.yml` per crear 
 2) Creat el diagrama amb Moon Modeler amb un fitxer `.dmm` i després afegit les dades amb el script `.js`. Pendent de correccions.
 
 ## Nivell 2
+1) Creat el diagrama amb Moon Modeler amb un fitxer `.dmm` i després afegit les dades amb el script `.js`. Pendent de correccions.
 
 ## Nivell 3
-
+1) Pendent.
