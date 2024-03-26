@@ -21,7 +21,7 @@ Utilitzat `docker compose` command amb el fitxer `docker-compose.yml` per crear 
 Utilitzat `docker compose` command amb el fitxer `docker-compose.yml` per crear l'imatge i contenidor de `Docker` per connectar a `MongoDB` server. 
 
 ### MongoDB Queries - Nivells 1, 2 i 3
-1) Pendent.
+1) Fetes les queries utilitzant: `find()`, `limit()`, `skip()`, `sort()`, `$gt`: greater than, `$lt`: lower than, `$elemMatch`, `$ne`: not equal, `$regex` utilitzant ^ i $, `$options: 'i'`, `$or`, `$in`, `$nin`: not in, `$exists`, `$type` i `$mod`.  
 
 ### Estructura de dades - MongoDB
 ## Nivell 1 - Optica
