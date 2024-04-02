@@ -1,5 +1,5 @@
 -- Query 1: ORDER BY
-SELECT apellido1, apellido2, nombre FROM persona WHERE tipo = 'alumno' ORDER BY apellido1, apellido2, nombre;
+SELECT apellido1, apellido2, nombre FROM persona p WHERE tipo = 'alumno' ORDER BY apellido1, apellido2, nombre;
 
 -- Query 2: IS NULL & AND
 SELECT nombre, apellido1, apellido2 FROM persona WHERE tipo = 'alumno' AND telefono IS NULL;
@@ -28,22 +28,22 @@ SELECT per.* FROM persona per INNER JOIN alumno_se_matricula_asignatura mat ON p
 
 -- LEFT & RIGHT JOIN (same as OUTER LEFT or OUTER RIGHT)
 -- Query 1:
-SELECT dep.nombre, per.apellido1, per.apellido2, per.nombre FROM persona per RIGHT JOIN profesor pro ON per.id = pro.id_profesor LEFT JOIN departamento dep ON pro.id_departamento = dep.id ORDER BY dep.nombre, per.apellido1, per.apellido2, per.nombre;
+SELECT dep.nombre, per.apellido1, per.apellido2, per.nombre FROM persona per LEFT JOIN profesor pro ON per.id = pro.id_profesor LEFT JOIN departamento dep ON pro.id_departamento = dep.id ORDER BY dep.nombre, per.apellido1, per.apellido2, per.nombre;
 
 -- Query 2:
-SELECT per.* FROM persona per RIGHT JOIN profesor pro ON per.id = pro.id_profesor LEFT JOIN departamento dep ON pro.id_departamento = dep.id WHERE dep.nombre IS NULL;
+SELECT per.* FROM persona per INNER JOIN profesor pro ON per.id = pro.id_profesor LEFT JOIN departamento dep ON pro.id_departamento = dep.id WHERE dep.nombre IS NULL;
 
 -- Query 3:
 SELECT dep.* FROM departamento dep LEFT JOIN profesor pro ON dep.id = pro.id_departamento WHERE pro.id_departamento IS NULL;
 
 -- Query 4:
-SELECT per.* FROM persona per RIGHT JOIN profesor pro ON per.id = pro.id_profesor LEFT JOIN asignatura asi ON pro.id_profesor = asi.id_profesor WHERE asi.id_profesor IS NULL;
+SELECT per.* FROM persona per RIGHT JOIN profesor pro ON per.id = pro.id_profesor LEFT JOIN asignatura asi ON pro.id_profesor = asi.id_profesor LEFT JOIN departamento dep ON pro.id_departamento = dep.id WHERE asi.id_profesor IS NULL;
 
 -- Query 5:
 SELECT asi.* FROM asignatura asi LEFT JOIN profesor pro ON asi.id_profesor = pro.id_profesor WHERE pro.id_profesor IS NULL;
 
 -- Query 6:
-SELECT dep.id, dep.nombre FROM departamento dep LEFT JOIN profesor pro ON dep.id = pro.id_departamento WHERE pro.id_departamento IS NULL;
+SELECT dep.nombre FROM departamento dep LEFT JOIN profesor pro ON dep.id = pro.id_departamento WHERE pro.id_departamento IS NULL;
 
 
 -- Consultes resum:
@@ -56,11 +56,11 @@ SELECT COUNT(*) FROM persona WHERE tipo = 'alumno' AND DATE(fecha_nacimiento) BE
 -- Query 3: COUNT() + GROUP BY
 SELECT COUNT(*) as cantidad, dep.nombre FROM profesor pro INNER JOIN departamento dep ON pro.id_departamento = dep.id GROUP BY dep.nombre ORDER BY cantidad DESC;
 
--- Query 4: LEFT JOIN
-SELECT dep.nombre, per.nombre FROM departamento dep LEFT JOIN profesor pro ON dep.id = pro.id_departamento LEFT JOIN persona per ON per.id = pro.id_profesor;
+-- Query 4:
+SELECT dep.nombre, COUNT(pro.id_profesor) as cantidad_de_profesores FROM departamento dep LEFT JOIN profesor pro ON dep.id = pro.id_departamento LEFT JOIN persona per ON per.id = pro.id_profesor GROUP BY dep.nombre;
 
 -- Query 5: COUNT() with parameter so that doesn't coun null results.
-SELECT gra.nombre, COUNT(asi.id_grado) as cantidad FROM grado gra LEFT JOIN asignatura asi ON gra.id = asi.id_grado GROUP BY gra.nombre;
+SELECT gra.nombre, COUNT(asi.id_grado) as cantidad FROM grado gra LEFT JOIN asignatura asi ON gra.id = asi.id_grado GROUP BY gra.nombre ORDER BY gra.nombre;
 
 -- Query 6: COUNT() + HAVING
 SELECT gra.nombre, COUNT(asi.id_grado) as cantidad FROM grado gra LEFT JOIN asignatura asi ON gra.id = asi.id_grado GROUP BY gra.nombre HAVING COUNT(asi.id_grado) > 40;

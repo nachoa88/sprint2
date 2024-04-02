@@ -4,8 +4,8 @@ SELECT nombre FROM producto;
 -- Query 2:
 SELECT nombre, precio FROM producto;
 
--- Query 3:
-SELECT * FROM producto;
+-- Query 3: SHOW COLUMNS
+SHOW COLUMNS FROM producto;
 
 -- Query 4:
 SELECT nombre, precio, (precio * 1.09) AS 'USD' FROM producto;
@@ -28,11 +28,11 @@ SELECT nombre, ROUND(precio, 2) FROM producto;
 -- Query 10: ROUND() -> No decimal places.
 SELECT nombre, ROUND(precio, 0) FROM producto;
 
--- Query 11: INNER JOIN
-SELECT fabricante.codigo FROM fabricante INNER JOIN producto ON fabricante.codigo = producto.codigo_fabricante;
+-- Query 11:
+SELECT codigo_fabricante FROM producto;
 
 -- Query 12: DISTINCT (No repetition)
-SELECT DISTINCT f.codigo FROM fabricante f INNER JOIN producto p ON f.codigo = p.codigo_fabricante;
+SELECT DISTINCT codigo_fabricante FROM producto;
 
 -- Query 13: ORDER BY
 SELECT nombre FROM fabricante ORDER BY nombre;
