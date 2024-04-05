@@ -15,8 +15,9 @@
 				}
 			],
 			"relations": [
-				"1a41146e-633d-409d-836c-3e16843a3266",
-				"10d8a2d0-929a-4ad7-9102-efa632de2a0f"
+				"10d8a2d0-929a-4ad7-9102-efa632de2a0f",
+				"914f224c-aec8-417b-9b3d-78690974bce0",
+				"0bf6db95-4c6b-4e4d-a4fb-87d349a19f26"
 			],
 			"visible": true,
 			"afterScript": "",
@@ -42,35 +43,19 @@
 					"comment": "",
 					"pattern": false,
 					"data": "",
-					"datatype": "93f6f148-c86d-4145-94df-9328c78ee359",
+					"datatype": "string",
 					"any": "",
-					"id": "bae88a32-d36b-483d-b836-1ed30d709112",
+					"id": "0ec35fff-0d0a-45a9-9cbe-e66244e9a434",
 					"list": false,
-					"name": "left_glass",
+					"name": "brand",
 					"nn": true,
 					"param": "",
 					"pk": false,
 					"collation": "",
 					"enum": "",
 					"estimatedSize": "",
-					"validation": ""
-				},
-				{
-					"comment": "",
-					"pattern": false,
-					"data": "",
-					"datatype": "c0473224-de13-4542-a5c9-60028895dfe4",
-					"any": "",
-					"id": "b0a20b8d-c915-4615-a6b2-de626fcabc22",
-					"list": false,
-					"name": "right_glass",
-					"nn": true,
-					"param": "",
-					"pk": false,
-					"collation": "",
-					"enum": "",
-					"estimatedSize": "",
-					"validation": ""
+					"validation": "",
+					"fk": true
 				},
 				{
 					"comment": "",
@@ -80,7 +65,7 @@
 					"any": "",
 					"id": "348457bb-07c1-4eef-aa91-9865e218aee4",
 					"list": false,
-					"name": "frame",
+					"name": "frame_type",
 					"nn": true,
 					"param": "",
 					"pk": false,
@@ -88,6 +73,24 @@
 					"enum": "",
 					"estimatedSize": "",
 					"validation": ""
+				},
+				{
+					"comment": "",
+					"pattern": false,
+					"data": "",
+					"datatype": "string",
+					"any": "",
+					"id": "8a6b62e4-5816-482d-a6e4-987f911b9dce",
+					"list": false,
+					"name": "provider",
+					"nn": true,
+					"param": "",
+					"pk": false,
+					"collation": "",
+					"enum": "",
+					"estimatedSize": "",
+					"validation": "",
+					"fk": true
 				},
 				{
 					"comment": "",
@@ -112,9 +115,9 @@
 					"data": "",
 					"datatype": "objectId",
 					"any": "",
-					"id": "a6e4c1c3-30d9-4df7-beb8-bc4049721cac",
-					"list": false,
-					"name": "brand_id",
+					"id": "569fc601-665c-4b9e-9a59-25f4357d0696",
+					"list": true,
+					"name": "bought_by",
 					"nn": true,
 					"param": "",
 					"pk": false,
@@ -123,6 +126,40 @@
 					"estimatedSize": "",
 					"validation": "",
 					"fk": true
+				},
+				{
+					"comment": "",
+					"pattern": false,
+					"data": "",
+					"datatype": "93f6f148-c86d-4145-94df-9328c78ee359",
+					"any": "",
+					"id": "bae88a32-d36b-483d-b836-1ed30d709112",
+					"list": false,
+					"name": "graduation",
+					"nn": true,
+					"param": "",
+					"pk": false,
+					"collation": "",
+					"enum": "",
+					"estimatedSize": "",
+					"validation": ""
+				},
+				{
+					"comment": "",
+					"pattern": false,
+					"data": "",
+					"datatype": "c0473224-de13-4542-a5c9-60028895dfe4",
+					"any": "",
+					"id": "b0a20b8d-c915-4615-a6b2-de626fcabc22",
+					"list": false,
+					"name": "glass_color",
+					"nn": true,
+					"param": "",
+					"pk": false,
+					"collation": "",
+					"enum": "",
+					"estimatedSize": "",
+					"validation": ""
 				},
 				{
 					"comment": "",
@@ -140,24 +177,6 @@
 					"enum": "",
 					"estimatedSize": "",
 					"validation": ""
-				},
-				{
-					"comment": "",
-					"pattern": false,
-					"data": "",
-					"datatype": "objectId",
-					"any": "",
-					"id": "569fc601-665c-4b9e-9a59-25f4357d0696",
-					"list": true,
-					"name": "bought_by_client",
-					"nn": true,
-					"param": "",
-					"pk": false,
-					"collation": "",
-					"enum": "",
-					"estimatedSize": "",
-					"validation": "",
-					"fk": true
 				}
 			],
 			"embeddable": false,
@@ -204,7 +223,8 @@
 				}
 			],
 			"relations": [
-				"ef28f4e3-be81-4635-afc1-2c79cd235ff8"
+				"ef28f4e3-be81-4635-afc1-2c79cd235ff8",
+				"0bf6db95-4c6b-4e4d-a4fb-87d349a19f26"
 			],
 			"visible": true,
 			"afterScript": "",
@@ -327,6 +347,17 @@
 					"id": "58b7c8ae-2b70-497a-872b-726ee3186e58",
 					"isPk": true,
 					"name": "Primary key"
+				},
+				{
+					"id": "d05bd002-0bab-46ae-9e62-a61784f76781",
+					"isPk": false,
+					"name": "suppliers_ai_1",
+					"cols": [
+						{
+							"id": "e59f03d9-98c0-4027-85ac-8cbdc070bfaa",
+							"colid": "2b82a8fd-942a-49d1-af2e-39b64a7ee44d"
+						}
+					]
 				}
 			],
 			"generate": true,
@@ -356,8 +387,8 @@
 				}
 			],
 			"relations": [
-				"1a41146e-633d-409d-836c-3e16843a3266",
-				"ef28f4e3-be81-4635-afc1-2c79cd235ff8"
+				"ef28f4e3-be81-4635-afc1-2c79cd235ff8",
+				"914f224c-aec8-417b-9b3d-78690974bce0"
 			],
 			"visible": true,
 			"afterScript": "",
@@ -430,6 +461,17 @@
 					"id": "b5f1e2a6-34bf-4bb3-b0e8-5675f5d5930e",
 					"isPk": true,
 					"name": "Primary key"
+				},
+				{
+					"id": "9f4fc86c-31d0-44ee-9cb8-c082f21a8fff",
+					"isPk": false,
+					"name": "brands_ai_1",
+					"cols": [
+						{
+							"id": "8d1c642f-ec1a-42f9-970f-83c013c5885a",
+							"colid": "b983a47a-cb06-4c0e-b872-0e23bc97ea70"
+						}
+					]
 				}
 			],
 			"generate": true,
@@ -507,7 +549,7 @@
 					"any": "",
 					"id": "b044a038-8999-42d1-bd6a-219ae87689cf",
 					"list": false,
-					"name": "client_data",
+					"name": "data",
 					"nn": true,
 					"param": "",
 					"pk": false,
@@ -542,7 +584,7 @@
 					"id": "e02df188-1cff-40bb-ab91-98b8ab27c92f",
 					"list": false,
 					"name": "recommended_by_client",
-					"nn": true,
+					"nn": false,
 					"param": "",
 					"pk": false,
 					"collation": "",
@@ -607,7 +649,7 @@
 					"any": "",
 					"id": "f9896eab-6be4-4643-bd95-33a11ede4511",
 					"list": false,
-					"name": "graduation",
+					"name": "left_glass",
 					"nn": true,
 					"param": "",
 					"pk": false,
@@ -624,7 +666,7 @@
 					"any": "",
 					"id": "f9b82f56-2957-47e6-bb86-6f0e9bc048ab",
 					"list": false,
-					"name": "color",
+					"name": "right_glass",
 					"nn": true,
 					"param": "",
 					"pk": false,
@@ -670,11 +712,11 @@
 					"comment": "",
 					"pattern": false,
 					"data": "",
-					"datatype": "decimal",
+					"datatype": "string",
 					"any": "",
 					"id": "3201f8f6-44c1-4271-8935-b25bb2ee842d",
 					"list": false,
-					"name": "graduation",
+					"name": "left_glass",
 					"nn": true,
 					"param": "",
 					"pk": false,
@@ -691,7 +733,7 @@
 					"any": "",
 					"id": "b11069e5-8d55-4ddd-86c1-2cd957cc5da6",
 					"list": false,
-					"name": "color",
+					"name": "right_glass",
 					"nn": true,
 					"param": "",
 					"pk": false,
@@ -1044,7 +1086,7 @@
 					"any": "",
 					"id": "e2ec2059-9725-40c0-8af7-f318b06abdf7",
 					"list": false,
-					"name": "phone_number",
+					"name": "telephone",
 					"nn": true,
 					"param": "",
 					"pk": false,
@@ -1078,7 +1120,7 @@
 					"any": "",
 					"id": "42c19da8-b927-452f-9ae0-92068a159049",
 					"list": false,
-					"name": "registration_date",
+					"name": "register_date",
 					"nn": true,
 					"param": "",
 					"pk": false,
@@ -1104,35 +1146,6 @@
 		}
 	},
 	"relations": {
-		"1a41146e-633d-409d-836c-3e16843a3266": {
-			"c_mch": "false",
-			"c_mp": "false",
-			"desc": "",
-			"type": "identifying",
-			"visible": true,
-			"c_p": "one",
-			"c_ch": "many",
-			"c_cp": "",
-			"c_cch": "",
-			"child": "3fca7abc-739a-42f3-a888-c89e0f09d4d9",
-			"cols": [
-				{
-					"childcol": "a6e4c1c3-30d9-4df7-beb8-bc4049721cac",
-					"id": "35f05c45-884c-4b78-9b4c-8fca1baecf9c",
-					"parentcol": "b2506d58-3cb6-4f65-bb7c-6feaacc66919"
-				}
-			],
-			"id": "1a41146e-633d-409d-836c-3e16843a3266",
-			"name": "brands-glasses.brand_id",
-			"parent": "f8b0d98c-af76-4e8b-8d41-3d930a95c1fd",
-			"parent_key": "b5f1e2a6-34bf-4bb3-b0e8-5675f5d5930e",
-			"ri_pd": "",
-			"ri_pu": "",
-			"generate": true,
-			"generateCustomCode": true,
-			"customCode": "",
-			"relationColor": "transparent"
-		},
 		"10d8a2d0-929a-4ad7-9102-efa632de2a0f": {
 			"c_mch": "false",
 			"c_mp": "false",
@@ -1193,7 +1206,7 @@
 		},
 		"1b505ab3-f3ae-46a4-ba34-58cff5f43c59": {
 			"c_mch": "false",
-			"c_mp": "false",
+			"c_mp": "true",
 			"desc": "",
 			"type": "identifying",
 			"visible": true,
@@ -1215,6 +1228,60 @@
 			"parent_key": "1c5252a2-3a33-4777-91c0-d57cc6c189ef",
 			"ri_pd": "",
 			"ri_pu": "",
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"914f224c-aec8-417b-9b3d-78690974bce0": {
+			"id": "914f224c-aec8-417b-9b3d-78690974bce0",
+			"visible": true,
+			"name": "name_glasses",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "9f4fc86c-31d0-44ee-9cb8-c082f21a8fff",
+			"parent": "f8b0d98c-af76-4e8b-8d41-3d930a95c1fd",
+			"child": "3fca7abc-739a-42f3-a888-c89e0f09d4d9",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "5df23124-a512-4efc-a5bd-b3ceeea8ba58",
+					"parentcol": "b983a47a-cb06-4c0e-b872-0e23bc97ea70",
+					"childcol": "0ec35fff-0d0a-45a9-9cbe-e66244e9a434"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"0bf6db95-4c6b-4e4d-a4fb-87d349a19f26": {
+			"id": "0bf6db95-4c6b-4e4d-a4fb-87d349a19f26",
+			"visible": true,
+			"name": "name_glasses",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "d05bd002-0bab-46ae-9e62-a61784f76781",
+			"parent": "1c5d0ba4-78d9-4e68-96e1-965feadd7628",
+			"child": "3fca7abc-739a-42f3-a888-c89e0f09d4d9",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "66e031cf-976d-4d8d-b85c-d09d4e25929d",
+					"parentcol": "2b82a8fd-942a-49d1-af2e-39b64a7ee44d",
+					"childcol": "8a6b62e4-5816-482d-a6e4-987f911b9dce"
+				}
+			],
 			"generate": true,
 			"generateCustomCode": true,
 			"customCode": "",
@@ -1250,7 +1317,7 @@
 		"def_collation": "",
 		"def_coltopk": true,
 		"def_others": "",
-		"lastSaved": 1711449219969,
+		"lastSaved": 1711449379609,
 		"writeFileParam": false,
 		"authorName": "",
 		"companyDetails": "",
@@ -1269,13 +1336,13 @@
 			"diagramItems": {
 				"3fca7abc-739a-42f3-a888-c89e0f09d4d9": {
 					"x": 546,
-					"y": 131,
-					"gHeight": 315,
-					"gWidth": 259,
+					"y": 132,
+					"gHeight": 226,
+					"gWidth": 224,
 					"background": "#03a9f4",
 					"color": "#ffffff",
 					"referencedItemId": "3fca7abc-739a-42f3-a888-c89e0f09d4d9",
-					"resized": false,
+					"resized": true,
 					"autoExpand": true,
 					"backgroundOpacity": "10",
 					"collapsed": false
@@ -1308,7 +1375,7 @@
 				},
 				"b121e721-c6e0-43b5-a606-c653d4631943": {
 					"x": 48,
-					"y": 440,
+					"y": 441,
 					"gHeight": 189,
 					"gWidth": 296,
 					"background": "#03a9f4",
@@ -1330,7 +1397,7 @@
 					"resized": false,
 					"autoExpand": true,
 					"backgroundOpacity": "10",
-					"collapsed": false
+					"collapsed": true
 				},
 				"c0473224-de13-4542-a5c9-60028895dfe4": {
 					"x": -1,
@@ -1343,7 +1410,7 @@
 					"resized": false,
 					"autoExpand": true,
 					"backgroundOpacity": "10",
-					"collapsed": false
+					"collapsed": true
 				},
 				"64c665ac-b301-4239-9a03-943276d440f1": {
 					"x": -1,
@@ -1369,7 +1436,7 @@
 					"resized": false,
 					"autoExpand": true,
 					"backgroundOpacity": "10",
-					"collapsed": false
+					"collapsed": true
 				},
 				"dda13f1a-7dae-4f68-8468-0ae3f4d74e80": {
 					"x": -1,

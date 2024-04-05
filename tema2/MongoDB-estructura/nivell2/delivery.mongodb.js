@@ -36,12 +36,14 @@ db.createCollection('clients', {
     },
     autoIndexId: true
 });
+
+
 db.createCollection('orders', {
     validator: {
         $jsonSchema: {
             bsonType: 'object',
             title: 'orders',
-            required: ['date_time', 'delivery_type', 'total_price', 'extra_information', 'products_included', 'client_id', 'store_id'],
+            required: ['date_time', 'delivery_type', 'total', 'note', 'products_included', 'store_id'],
             properties: {
                 date_time: {
                     bsonType: 'date'
@@ -49,17 +51,14 @@ db.createCollection('orders', {
                 delivery_type: {
                     enum: ['repartiment a domicili', 'recollir en botiga']
                 },
-                total_price: {
+                total: {
                     bsonType: 'decimal'
                 },
-                extra_information: {
+                note: {
                     bsonType: 'string'
                 },
                 products_included: {
                     bsonType: 'array'
-                },
-                client_id: {
-                    bsonType: 'objectId'
                 },
                 store_id: {
                     bsonType: 'objectId'
@@ -69,6 +68,7 @@ db.createCollection('orders', {
     },
     autoIndexId: true
 });
+
 db.createCollection('products', {
     validator: {
         $jsonSchema: {
@@ -99,6 +99,7 @@ db.createCollection('products', {
     },
     autoIndexId: true
 });
+
 db.createCollection('stores', {
     validator: {
         $jsonSchema: {
@@ -122,6 +123,7 @@ db.createCollection('stores', {
         }
     }
 });
+
 db.createCollection('employees', {
     validator: {
         $jsonSchema: {
@@ -151,6 +153,7 @@ db.createCollection('employees', {
         }
     }
 });
+
 db.createCollection('delivery_orders', {
     validator: {
         $jsonSchema: {
@@ -172,61 +175,62 @@ db.createCollection('delivery_orders', {
     }
 });
 
-
-// Insert into clients
-db.clients.insertOne({
-    name: 'John',
-    surname: 'Doe',
-    address: '123 Main St',
-    zip_code: 12345,
-    city: 'Barcelona',
-    province: 'Barcelona',
-    phone_number: '123-456-7890'
-});
-
-// Insert into stores
-let storeId = db.stores.insertOne({
-    address: '456 Market St',
-    zip_code: 67890,
-    city: 'Barcelona',
-    province: 'Barcelona'
-}).insertedId;
-
-// Insert into employees
-let employeeId = db.employees.insertOne({
-    name: 'Jane',
-    surname: 'Doe',
-    NIF: 'XYZ123',
-    phone_number: '098-765-4321',
-    role: 'repartidor/a',
-    store_id: storeId
-}).insertedId;
-
-// Insert into products
-let productId = db.products.insertOne({
-    type: 'pizza',
-    pizza_category: 'Vegetarian',
-    name: 'Veggie Delight',
-    description: 'A delicious vegetarian pizza',
-    image: 'http://example.com/veggie-delight.jpg',
-    price: NumberDecimal("9.99")
-}).insertedId;
-
-// Insert into orders
-let clientId = db.clients.findOne()._id;
-let orderId = db.orders.insertOne({
-    date_time: new Date(),
-    delivery_type: 'repartiment a domicili',
-    total_price: NumberDecimal("9.99"),
-    extra_information: 'No cheese',
-    products_included: [productId],
-    client_id: clientId,
-    store_id: storeId
-}).insertedId;
-
-// Insert into delivery_orders
-db.delivery_orders.insertOne({
-    order_id: orderId,
-    employee_id: employeeId,
-    date_time_delivered: new Date()
+db.createCollection('confirmed_orders', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            title: 'confirmed_orders',
+            required: ['name', 'price', 'total', 'state', 'client'],
+            properties: {
+                name: {
+                    bsonType: 'string'
+                },
+                price: {
+                    bsonType: 'decimal'
+                },
+                total: {
+                    bsonType: 'decimal'
+                },
+                state: {
+                    enum: ['delivered', 'paid']
+                },
+                client: {
+                    bsonType: 'object',
+                    title: 'object',
+                    required: ['id', 'name'],
+                    properties: {
+                        id: {
+                            bsonType: 'objectId'
+                        },
+                        name: {
+                            bsonType: 'string'
+                        }
+                    }
+                },
+                deliver_in: {
+                    bsonType: 'object',
+                    title: 'object',
+                    required: ['street', 'number', 'floor', 'contact_number'],
+                    properties: {
+                        street: {
+                            bsonType: 'string'
+                        },
+                        number: {
+                            bsonType: 'string'
+                        },
+                        floor: {
+                            bsonType: 'string'
+                        },
+                        contact_number: {
+                            bsonType: 'string'
+                        },
+                        note: {
+                            bsonType: 'string'
+                        }
+                    }
+                }
+            }
+        }
+    },
+    autoIndexId: true
 });

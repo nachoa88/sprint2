@@ -141,42 +141,41 @@ db.createCollection('glasses', {
     $jsonSchema: {
       bsonType: 'object',
       title: 'glasses',
-      required: ['left_glass', 'right_glass', 'frame', 'price', 'brand_id'],
+      required: ['graduation', 'glass_color', 'frame_type', 'price', 'brand_id', 'sale_details'],
       properties: {
-        left_glass: {
+        graduation: {
           bsonType: 'object',
           title: 'object',
-          required: ['graduation', 'color'],
+          required: ['left_glass', 'right_glass'],
           properties: {
-            graduation: {
+            left_glass: {
               bsonType: 'decimal'
             },
-            color: {
+            right_glass: {
+              bsonType: 'decimal'
+            }
+          }
+        },
+        glass_color: {
+          bsonType: 'object',
+          title: 'object',
+          required: ['left_glass', 'right_glass'],
+          properties: {
+            left_glass: {
+              bsonType: 'string'
+            },
+            right_glass: {
               bsonType: 'string'
             }
           }
         },
-        right_glass: {
-          bsonType: 'object',
-          title: 'object',
-          required: ['graduation', 'color'],
-          properties: {
-            graduation: {
-              bsonType: 'decimal'
-            },
-            color: {
-              bsonType: 'string'
-            }
-          }
-        },
-        frame: {
+        frame_type: {
           bsonType: 'object',
           title: 'object',
           required: ['type', 'color'],
           properties: {
             type: {
-              bsonType: 'string',
-              enum: ['flotant', 'pasta', 'metàl·lica']
+              bsonType: 'string'
             },
             color: {
               bsonType: 'string'
@@ -191,6 +190,7 @@ db.createCollection('glasses', {
         },
         sale_details: {
           bsonType: 'object',
+          title: 'object',
           required: ['date', 'worker_nif'],
           properties: {
             date: {
@@ -203,23 +203,23 @@ db.createCollection('glasses', {
         }
       }
     }
-  },
-  autoIndexId: true
+  }
 });
 
 // Insert into glasses
 var brand1 = db.brands.findOne({ name: "Brand 1" });
 db.glasses.insertMany([
   {
-    "left_glass": {
-      "graduation": NumberDecimal("1.0"),
-      "color": "blue"
+    "graduation": {
+      "left_glass": NumberDecimal("1.0"),
+      "right_glass": NumberDecimal("1.5")
+
     },
-    "right_glass": {
-      "graduation": NumberDecimal("1.5"),
-      "color": "blue"
+    "glass_color": {
+      "left_glass": "blue",
+      "right_glass": "blue"
     },
-    "frame": {
+    "frame_type": {
       "type": "flotant",
       "color": "black"
     },
@@ -231,15 +231,15 @@ db.glasses.insertMany([
     }
   },
   {
-    "left_glass": {
-      "graduation": NumberDecimal("2.0"),
-      "color": "green"
+    "graduation": {
+      "left_glass": NumberDecimal("2.0"),
+      "right_glass": NumberDecimal("2.0")
     },
-    "right_glass": {
-      "graduation": NumberDecimal("2.0"),
-      "color": "green"
+    "glass_color": {
+      "left_glass": "green",
+      "right_glass": "green"
     },
-    "frame": {
+    "frame_type": {
       "type": "pasta",
       "color": "white"
     },
@@ -258,71 +258,70 @@ db.createCollection('clients', {
     $jsonSchema: {
       bsonType: 'object',
       title: 'clients',
-      required: ['name', 'client_data', 'zip_code'],
+      required: ['name', 'data', 'zip_code', 'last_shoppings'],
       properties: {
         name: {
           bsonType: 'string'
         },
-        client_data: {
+        data: {
           bsonType: 'object',
           title: 'object',
-          required: ['address', 'phone_number', 'email', 'registration_date'],
+          required: ['address', 'telephone', 'email', 'register_date'],
           properties: {
             address: {
               bsonType: 'string'
             },
-            phone_number: {
+            telephone: {
               bsonType: 'string'
             },
             email: {
               bsonType: 'string'
             },
-            registration_date: {
+            register_date: {
               bsonType: 'date'
             }
           }
         },
         zip_code: {
-          bsonType: 'int'
+          bsonType: 'double'
         },
-        recommended_by_client: {
-          bsonType: 'objectId'
-        },
-        last_purchases: {
+        last_shoppings: {
           bsonType: 'array',
           items: {
             bsonType: 'objectId'
           }
+        },
+        recommended_by_client: {
+          bsonType: 'objectId'
         }
       }
     }
-  },
-  autoIndexId: true
+  }
 });
 
 // Insert into clients
 db.clients.insertMany([
   {
     "name": "Client 1",
-    "client_data": {
+    "data": {
       "address": "789 Test St",
-      "phone_number": "345-678-9012",
+      "telephone": "345-678-9012",
       "email": "client1@test.com",
-      "registration_date": new ISODate()
+      "register_date": new ISODate()
     },
     "zip_code": 34567,
-    "last_purchases": []
+    "last_shoppings": []
   },
   {
     "name": "Client 2",
-    "client_data": {
+    "data": {
       "address": "012 Test St",
-      "phone_number": "456-789-0123",
+      "telephone": "456-789-0123",
       "email": "client2@test.com",
-      "registration_date": new ISODate()
+      "register_date": new ISODate()
     },
     "zip_code": 45678,
-    "last_purchases": []
+    "last_shoppings": []
   }
 ]);
 
@@ -331,12 +330,12 @@ db.clients.insertMany([
 var client = db.clients.findOne({ name: "Client 1" });
 
 // Get the _id of the new purchase
-var purchase = db.glasses.findOne({ "left_glass.color": "blue" });
+var purchase = db.glasses.findOne({ "glass_color.left_glass": "blue" });
 
-// Add the new purchase to the client's last_purchases
+// Add the new purchase to the client's last_shoppings
 db.clients.update(
   { _id: client._id },
-  { $push: { last_purchases: purchase._id } }
+  { $push: { last_shoppings: purchase._id } }
 );
 
 // Get the _id of the client who made the recommendation
