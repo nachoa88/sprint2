@@ -1,10 +1,8 @@
-version: '3.8' # specify the version of docker-compose file format, each version has different features and compatibilities with Docker Engine (Docker version)
-
 services:
   db:
     image: mysql:8.0 # use the latest mysql image
     environment:
-      MYSQL_ROOT_PASSWORD: 123456789 # set the root password
+      MYSQL_ROOT_PASSWORD: 1234 # set the root password
     ports:
       - 3306:3306 # map the port to the host
     volumes:
